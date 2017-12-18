@@ -2,27 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-[DisallowMultipleComponent]//empèche d'ajouter plusieurs fois ce script au même objet
+[DisallowMultipleComponent]//blocks the user from adding the same script multipe time on the same object
 public class Life  : MonoBehaviour
 {
     
     #region Public Members
-    [ContextMenuItem("Default Values", "PutBackDefaultHealthValues")]//ajoute une option click droit "default values" qui lance la fonction private void PutBackDefaultHealthValues()
+    [ContextMenuItem("Default Values", "PutBackDefaultHealthValues")]//add on option right click "default values" that triggers void PutBackDefaultHealthValues()
 
     [Header("Health Related Parameters")]
 
     [SerializeField]
     [Tooltip ("Current health of the attached object/character")]
     private int m_currentHeath=10;
+    
     [SerializeField]
     [Tooltip("Maximum health of the attached object/character")]
     private int m_maxHeath=10;
-
+    
     [System.Serializable]
     public class LifeChangeEvent : UnityEvent<int> { }
-    public LifeChangeEvent _onLifeChange;
     [System.Serializable]
     public class DeathEvent : UnityEvent<bool> { }
+
+    [Space(20f)]
+    public LifeChangeEvent _onLifeChange;
+    [Space(10f)]
     public DeathEvent _onDeath;
 
     [Header("Debug tools")]
@@ -67,11 +71,27 @@ public class Life  : MonoBehaviour
         m_previousHealth = m_currentHeath;
 
     }
+
+
+    //test delegate
+    public delegate void Dosomething(float testfloat);
+    public Dosomething _attack;
+    private void Kick(float damage)
+    {
+
+    }
+    private void Punch(float damage)
+    {
+
+    }
     void Awake () 
     {
-		
-	}
+        _attack += Kick(5f);
+        _attack += Punch(3f);
+    }
 	
+
+
 	void Update () 
     {
 		
@@ -101,6 +121,11 @@ public class Life  : MonoBehaviour
         }
         
     }
+
+
+    
+    
+
     #endregion
 
     #region Private Void
