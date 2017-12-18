@@ -74,8 +74,8 @@ public class Life  : MonoBehaviour
 
 
     //test delegate
-    public delegate void Dosomething(float testfloat);
-    public Dosomething _attack;
+    public delegate void DoSomething(float testfloat);
+    public DoSomething _attack;
     private void Kick(float damage)
     {
 
@@ -86,8 +86,9 @@ public class Life  : MonoBehaviour
     }
     void Awake () 
     {
-        _attack += Kick(5f);
-        _attack += Punch(3f);
+        _attack += Kick;
+        _attack += Punch;
+        _attack(0.1f);//il vas lancer Kick ET punch en leur donnant la valeur 0.1f
     }
 	
 
