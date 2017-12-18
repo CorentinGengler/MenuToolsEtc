@@ -421,7 +421,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf43c451a8ea9848ac86a7dd9e160c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DropDownButton: 0
   lookAtPoint: {x: 0, y: 0, z: 0}
+  experience: 0
 --- !u!23 &1035387705
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -516,7 +518,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf43c451a8ea9848ac86a7dd9e160c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DropDownButton: 0
   lookAtPoint: {x: 0, y: 0, z: 0}
+  experience: 0
 --- !u!23 &2058079374
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -611,7 +615,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf43c451a8ea9848ac86a7dd9e160c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DropDownButton: 1
   lookAtPoint: {x: 0, y: 0, z: 0}
+  experience: 9555
 --- !u!23 &2138285791
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -669,8 +675,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2138285789}
-  m_LocalRotation: {x: 0.024306748, y: 0.86834097, z: 0.042767167, w: -0.49352226}
-  m_LocalPosition: {x: 5.86, y: -0.6734779, z: 3.49}
+  m_LocalRotation: {x: 0.036773726, y: 0.8749061, z: 0.06728279, w: -0.4781841}
+  m_LocalPosition: {x: 5.44, y: -1, z: 3.49}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
