@@ -19,6 +19,7 @@ public class LookAtPointEditor : Editor
         serializedObject.Update();
         EditorGUILayout.PropertyField(lookAtPoint);
         serializedObject.ApplyModifiedProperties();
+
         if (lookAtPoint.vector3Value.y > (target as LookAtPoint).transform.position.y)
         {
             EditorGUILayout.LabelField("(Above this object)");
@@ -27,5 +28,18 @@ public class LookAtPointEditor : Editor
         {
             EditorGUILayout.LabelField("(Below this object)");
         }
+        
+        LookAtPoint myTarget = (LookAtPoint)target;
+
+        if (GUILayout.Button("Drawer"))
+        {
+            myTarget.DropDownButton = !myTarget.DropDownButton;
+        }
+        if (myTarget.DropDownButton == true)
+        {
+            myTarget.experience = EditorGUILayout.IntField("Experience", myTarget.experience);
+            EditorGUILayout.LabelField("Level", myTarget.Level.ToString());
+        }
+        
     }
 }
