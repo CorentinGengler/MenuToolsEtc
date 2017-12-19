@@ -113,6 +113,10 @@ public class Life  : MonoBehaviour
     {
         MyCurrentHealth = m_currentHeath;
         MymaxHealth = m_maxHeath;
+        if(m_currentHeath>m_maxHeath)
+        {
+            m_currentHeath = m_maxHeath;
+        }
     }
 
     

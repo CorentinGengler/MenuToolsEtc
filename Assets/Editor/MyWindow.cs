@@ -11,17 +11,18 @@ class MyWindow : EditorWindow
     float m_myFloat = 1.23f;
     GameObject[] AllObjectsInTheScene;
     List<GameObject> MyListOfLivingIdiotsOnTheScene = new List<GameObject>();
-    // Add menu item named "My Window" to the Window menu
+    List<int> ListCurrentHealth = new List<int>();
+    List<int> ListMaxHealth = new List<int>();
     [MenuItem("MyMenu2/My Window")]
     public static void ShowWindow()
     {
-        //Show existing window instance. If one doesn't exist, make one.
         EditorWindow.GetWindow(typeof(MyWindow));
     }
 
     void OnGUI()
     {
         Debug.Log("iterationGUI");
+        /*
         //part1
         Color baseColor = GUI.backgroundColor;
         GUILayout.Label("Base Settings", EditorStyles.boldLabel);
@@ -48,30 +49,56 @@ class MyWindow : EditorWindow
         {
             myString = "Merry Christmas";
         }
-
+        */
         //part3
         bool buttonFind = GUILayout.Button("Find and list all the living");
         if (buttonFind)
         {
             AllObjectsInTheScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
             MyListOfLivingIdiotsOnTheScene = new List<GameObject>();
+            ListCurrentHealth = new List<int>();
+            ListMaxHealth = new List<int>();
         }
         
         if(AllObjectsInTheScene!=null)
         {
+            GUILayout.BeginScrollView(new Vector2(5f,5f));
             MyListOfLivingIdiotsOnTheScene = new List<GameObject>();
+            ListCurrentHealth = new List<int>();
+            ListMaxHealth = new List<int>();
+            int i = 0;
             foreach (GameObject obj in AllObjectsInTheScene)
             {
                 if (obj.GetComponent<Life>() == true)
                 {
                     MyListOfLivingIdiotsOnTheScene.Add(obj);
                     GUILayout.Label("Name : " + obj.name, EditorStyles.whiteLargeLabel);
-                    GUILayout.Label("Current Health : " + obj.GetComponent<Life>().MyCurrentHealth.ToString(), EditorStyles.boldLabel);
-                    GUILayout.Label("Maximum Health : " + obj.GetComponent<Life>().MymaxHealth.ToString(), EditorStyles.boldLabel);
-                    
+                    //changeCurrentHealth
+                    ListCurrentHealth.Add(obj.GetComponent<Life>().MyCurrentHealth);
+                    ListCurrentHealth[i] = (int)EditorGUILayout.Slider("Current Health", (int)obj.GetComponent<Life>().MyCurrentHealth, 0, obj.GetComponent<Life>().MymaxHealth);
+                    MyListOfLivingIdiotsOnTheScene[i].GetComponent<Life>().MyCurrentHealth = ListCurrentHealth[i];
+                    //changeMaxHealth
+                    ListMaxHealth.Add(obj.GetComponent<Life>().MymaxHealth);
+                    ListMaxHealth[i] = EditorGUILayout.IntField("Maximum Health",obj.GetComponent<Life>().MymaxHealth);
+                    MyListOfLivingIdiotsOnTheScene[i].GetComponent<Life>().MymaxHealth= ListMaxHealth[i];
+                    //----
+                    //GUILayout.Label("Maximum Health : " + obj.GetComponent<Life>().MymaxHealth.ToString(), EditorStyles.boldLabel);
+                    GUILayout.BeginHorizontal();
+                    if (GUILayout.Button("KILL HIM !"))
+                    {
+                        obj.SetActive(false);
+                        obj.GetComponent<Life>().MyCurrentHealth = 0;
+                    }
+                    if (GUILayout.Button("Raise the dead"))
+                    {
+                        obj.SetActive(true);
+                        obj.GetComponent<Life>().MyCurrentHealth = obj.GetComponent<Life>().MymaxHealth;
+                    }
+                    GUILayout.EndHorizontal();
+                    i++;
                 }
             }
-
+            GUILayout.EndScrollView();
             GUILayout.Label("nombre de vivants : " + MyListOfLivingIdiotsOnTheScene.Count, EditorStyles.whiteLargeLabel);
         }
 
