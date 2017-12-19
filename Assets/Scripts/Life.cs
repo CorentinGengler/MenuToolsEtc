@@ -100,7 +100,7 @@ public class Life  : MonoBehaviour
         _attack += Punch;
         _attack(0.1f);//il vas lancer Kick ET punch en leur donnant la valeur 0.1f
     }
-    
+
 
 
     void Update () 
