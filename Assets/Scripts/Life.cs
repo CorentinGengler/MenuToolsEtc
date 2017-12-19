@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 [DisallowMultipleComponent]//blocks the user from adding the same script multipe time on the same object
+[System.Serializable]
 public class Life  : MonoBehaviour
 {
     
@@ -20,7 +21,7 @@ public class Life  : MonoBehaviour
     private int m_maxHeath=10;
     
     [System.Serializable]
-    public class LifeChangeEvent : UnityEvent<int> { }
+    public class LifeChangeEvent : UnityEvent { }
     [System.Serializable]
     public class DeathEvent : UnityEvent<bool> { }
 
@@ -35,7 +36,17 @@ public class Life  : MonoBehaviour
 
 
     #region Public Void
-    
+
+    public void LifeChanged()
+    {
+        if ((m_currentHeath != m_previousHealth) && (m_currentHeath != 0))
+        {
+            Debug.Log("life of " + gameObject.name + "is now at " + m_currentHeath);
+            m_previousHealth = m_currentHeath;
+        }
+
+    }
+
     private void PutBackDefaultHealthValues()
     {
         m_currentHeath = 10;
@@ -49,7 +60,7 @@ public class Life  : MonoBehaviour
         get { return m_currentHeath; }
         set {
                 m_currentHeath = Mathf.Clamp(value, 0, 99999);
-                _onLifeChange.Invoke(m_currentHeath);
+                _onLifeChange.Invoke();
                 if (m_currentHeath == 0)
                 {
                     _onDeath.Invoke(true);
@@ -104,15 +115,7 @@ public class Life  : MonoBehaviour
         MymaxHealth = m_maxHeath;
     }
 
-    private void LifeChanged(int Health)
-    {
-        if((Health!=m_previousHealth)&&(Health!=0))
-        {
-            Debug.Log("life is now at " + Health);
-            m_previousHealth = Health;
-        }
-        
-    }
+    
     private void IsDead(bool isDead)
     {
         if(m_previousIsDead==false)
