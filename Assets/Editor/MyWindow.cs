@@ -107,7 +107,7 @@ class MyWindow : EditorWindow
             GUILayout.EndScrollView();
             GUILayout.Label("nombre de vivants : " + MyListOfLivingIdiotsOnTheScene.Count, EditorStyles.whiteLargeLabel);
         }
-
+        
 
 
 

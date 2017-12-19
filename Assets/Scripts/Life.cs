@@ -80,7 +80,6 @@ public class Life  : MonoBehaviour
         _onLifeChange.AddListener(LifeChanged);
         _onDeath.AddListener(IsDead);
         m_previousHealth = m_currentHeath;
-
     }
 
 
@@ -101,13 +100,13 @@ public class Life  : MonoBehaviour
         _attack += Punch;
         _attack(0.1f);//il vas lancer Kick ET punch en leur donnant la valeur 0.1f
     }
-	
+    
 
 
-	void Update () 
+    void Update () 
     {
-		
-	}
+        
+    }
 
     private void OnValidate()
     {

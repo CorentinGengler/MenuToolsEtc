@@ -16,6 +16,7 @@ class MyWindow : EditorWindow
     {
 
 
+
         // The actual window code goes here
     }
 }
