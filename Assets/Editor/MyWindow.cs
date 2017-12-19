@@ -19,9 +19,12 @@ class MyWindow : EditorWindow
         EditorWindow.GetWindow(typeof(MyWindow));
     }
 
+    Vector2 scrollPosition = Vector2.zero;
+
     void OnGUI()
     {
         Debug.Log("iterationGUI");
+        
         /*
         //part1
         Color baseColor = GUI.backgroundColor;
@@ -62,7 +65,8 @@ class MyWindow : EditorWindow
         
         if(AllObjectsInTheScene!=null)
         {
-            GUILayout.BeginScrollView(new Vector2(5f,5f));
+            scrollPosition=GUILayout.BeginScrollView(scrollPosition);
+            
             MyListOfLivingIdiotsOnTheScene = new List<GameObject>();
             ListCurrentHealth = new List<int>();
             ListMaxHealth = new List<int>();
@@ -73,16 +77,15 @@ class MyWindow : EditorWindow
                 {
                     MyListOfLivingIdiotsOnTheScene.Add(obj);
                     GUILayout.Label("Name : " + obj.name, EditorStyles.whiteLargeLabel);
-                    //changeCurrentHealth
+                    //show&&changeCurrentHealth
                     ListCurrentHealth.Add(obj.GetComponent<Life>().MyCurrentHealth);
-                    ListCurrentHealth[i] = (int)EditorGUILayout.Slider("Current Health", (int)obj.GetComponent<Life>().MyCurrentHealth, 0, obj.GetComponent<Life>().MymaxHealth);
+                    ListCurrentHealth[i] = (int)EditorGUILayout.Slider("Current Health", obj.GetComponent<Life>().MyCurrentHealth, 0, obj.GetComponent<Life>().MymaxHealth);
                     MyListOfLivingIdiotsOnTheScene[i].GetComponent<Life>().MyCurrentHealth = ListCurrentHealth[i];
-                    //changeMaxHealth
+                    //show&&changeMaxHealth
                     ListMaxHealth.Add(obj.GetComponent<Life>().MymaxHealth);
                     ListMaxHealth[i] = EditorGUILayout.IntField("Maximum Health",obj.GetComponent<Life>().MymaxHealth);
                     MyListOfLivingIdiotsOnTheScene[i].GetComponent<Life>().MymaxHealth= ListMaxHealth[i];
                     //----
-                    //GUILayout.Label("Maximum Health : " + obj.GetComponent<Life>().MymaxHealth.ToString(), EditorStyles.boldLabel);
                     GUILayout.BeginHorizontal();
                     if (GUILayout.Button("KILL HIM !"))
                     {
