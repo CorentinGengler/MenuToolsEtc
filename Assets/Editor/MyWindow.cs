@@ -94,8 +94,11 @@ class MyWindow : EditorWindow
                     }
                     if (GUILayout.Button("Raise the dead"))
                     {
-                        obj.SetActive(true);
-                        obj.GetComponent<Life>().MyCurrentHealth = obj.GetComponent<Life>().MymaxHealth;
+                        if(obj.activeSelf==false)
+                        {
+                            obj.SetActive(true);
+                            obj.GetComponent<Life>().MyCurrentHealth = obj.GetComponent<Life>().MymaxHealth;
+                        }
                     }
                     GUILayout.EndHorizontal();
                     i++;
